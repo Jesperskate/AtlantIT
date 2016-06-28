@@ -1,0 +1,333 @@
+
+<head>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.11/skrollr.min.js"></script>
+</head>
+
+<div class="container"  id="skrollr-body" data-0="background-color:rgb(0,201,147);"data-400="background-color:rgb(74,173,255);" data-1000="background-color:rgb(74,173,255);"data-1300="background-color:rgb(0,201,147);">
+  <img id="logo-atlantit" src="logo-shape-atlantit.png">
+  <h2>ATLANTIT</h2>
+  <p>Wij zijn studenten met passie voor IT. </p>
+  
+  <a class="arrow" href="#anchor1"><i class="icon-sort-down"></i></a>
+  </p>
+
+<div class="section" id="sect1">
+  <div class="anchor" id="anchor1"></div>
+  <div id="hiddenIcon">
+    <i class="icon-mobile-phone"></i>
+        </div>
+  <div id="phone" data-0="margin-left: -20%; opacity:0" data-350="margin-left: 10%; opacity:1">
+    
+  
+    <div id="screen"> 
+      
+          <img width="100%" src="scr-westbeach.png">    
+      <!--/ map-->   
+    </div><!--/ screen-->
+    </div><!--/ phone-->
+  <div class="explanation" data-300="opacity: 0" data-350="opacity: 1">
+  <h2>We maken het web van morgen</h2>
+    <p>Door op de hoogte te zijn van nieuwe technologieen en wensen van jonge gebruikers.</p>
+    <a class="arrow" href="#anchor2"><i class="icon-sort-down"></i></a>
+    </div><!--/ explanation-->
+  </div><!--/ sect1-->
+  
+  <div class="section" id="sect2">
+    <div class="anchor" id="anchor2"></div>
+    <div id="hiddenIcon">
+    <i class="icon-twitter"></i>
+        </div>
+    <div id="twitter"  data-600="margin-top: -20%; opacity: 0" data-1000="margin-top: 0; opacity:1">
+    <i class="icon-twitter"></i>
+    </div>
+    <div class="explanation" data-850=" opacity: 0" data-900=" opacity:1">
+    <h2>Wie wij zijn</h2>
+    <ul class="team">
+      <li>
+        <div class="imgdiv" ><img src="img-jesper.jpg"></div>
+        <div class="infodiv" >
+          <span>Jesper Voorendt</span>
+          <br>
+          <a href="http://jespervoorendt.nl"><span>Website</span></a>          
+          <br>
+          <a href="mailto:jesper@atlantit.com"><span>jesper@atlantit.com</span></a>
+
+
+        </div>
+      </li>
+      <li>
+        <div class="imgdiv" ><img src="img-renaldo.jpg"></div>
+        <div class="infodiv" >
+          <span>Renaldo Kalicharan</span>
+          <br>
+          <a href="mailto:renaldo@atlantit.com"><span>renaldo@atlantit.com</span></a>
+
+        </div>
+      </li>      
+
+    </ul>
+      <a class="arrow" href="#anchor3"><i class="icon-sort-down"></i></a>
+    </div><!--/ explanation-->
+  </div><!--sect2-->
+  
+    <div class="section" id="sect3">
+    <div class="anchor" id="anchor3"></div>
+      <div id="hiddenIcon">
+    <i class="icon-rocket icon-rotate-180"></i>
+        <p></p>
+        </div>
+    <div class="explanation-right" data-1350=" opacity: 0" data-1400=" opacity:1">
+    <h2>Stel uw vraag</h2>
+    <p> Bel +31619241111 of mail naar <a href="mailto:info@atlantit.com">info@atlantit.com</a></p>
+      
+<!-- Begin MailChimp Signup Form -->
+
+<!-- <div id="mc_embed_signup">
+<form action="">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="me@example.com" onfocus="this.placeholder = ''" onblur="this.placeholder = 'me@example.com'" required>
+  <div><input type="submit" value="I want it!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div> -->
+
+<!--End mc_embed_signup-->
+    </div><!--/ explanation-->
+      <div id="rocket" data-1100="margin-top:-300px; margin-right:0%; opacity: 0" data-1400="margin-top:50; margin-right:20%; opacity:1">
+    <i id="therocket" class="icon-rocket icon-rotate-180"></i>
+    </div><!--/ rocket-->
+  </div><!--sect3-->
+<div class="section" id="footer">
+  <p> (c) Atlantit 2016. KvK: 64881369</p>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+if ($(window).width() < 700) {
+   alert('Excuses, deze website is nog niet gereed voor mobiel. Gebruik een groter scherm of mail naar info@atlantit.com. ');
+}
+
+
+
+skrollr.init({
+    forceHeight: false
+});
+
+
+
+
+(function(document, window) {
+  'use strict';
+
+  var DEFAULT_DURATION = 500;
+  var DEFAULT_EASING = 'sqrt';
+
+  var MENU_TOP_ATTR = 'data-menu-top';
+  var MENU_OFFSET_ATTR = 'data-menu-offset';
+
+  var skrollr = window.skrollr;
+  var history = window.history;
+  var supportsHistory = !!history.pushState;
+
+  /*
+    Since we are using event bubbling, the element that has been clicked
+    might not acutally be the link but a child.
+  */
+  var findParentLink = function(element) {
+    //Yay, it's a link!
+    if(element.tagName === 'A') {
+      return element;
+    }
+
+    //We reached the top, no link found.
+    if(element === document) {
+      return false;
+    }
+
+    //Maybe the parent is a link.
+    return findParentLink(element.parentNode);
+  };
+
+  /*
+    Handle the click event on the document.
+  */
+  var handleClick = function(e) {
+    //Only handle left click.
+    if((e.which || e.button) !== 1) {
+      return;
+    }
+
+    var link = findParentLink(e.target);
+
+    //The click did not happen inside a link.
+    if(!link) {
+      return;
+    }
+
+    if(handleLink(link)) {
+      e.preventDefault();
+    }
+  };
+
+  /*
+    Handles the click on a link. May be called without an actual click event.
+    When the fake flag is set, the link won't change the url and the position won't be animated.
+  */
+  var handleLink = function(link, fake) {
+    //Don't use the href property (link.href) because it contains the absolute url.
+    var href = link.getAttribute('href');
+
+    //Check if it's a hashlink.
+    if(!/^#/.test(href)) {
+      return false;
+    }
+
+    //Now get the targetTop to scroll to.
+    var targetTop;
+
+    //If there's a data-menu-top attribute, it overrides the actuall anchor offset.
+    var menuTop = link.getAttribute(MENU_TOP_ATTR);
+
+    if(menuTop !== null) {
+      targetTop = +menuTop;
+    } else {
+      var scrollTarget = document.getElementById(href.substr(1));
+
+      //Ignore the click if no target is found.
+      if(!scrollTarget) {
+        return false;
+      }
+
+      targetTop = _skrollrInstance.relativeToAbsolute(scrollTarget, 'top', 'top');
+
+      var menuOffset = scrollTarget.getAttribute(MENU_OFFSET_ATTR);
+
+      if(menuOffset !== null) {
+        targetTop += +menuOffset;
+      }
+    }
+
+    if(supportsHistory && !fake) {
+      history.pushState({top: targetTop}, '', href);
+    }
+
+    //Now finally scroll there.
+    if(_animate && !fake) {
+      _skrollrInstance.animateTo(targetTop, {
+        duration: _duration(_skrollrInstance.getScrollTop(), targetTop),
+        easing: _easing
+      });
+    } else {
+      defer(function() {
+        _skrollrInstance.setScrollTop(targetTop);
+      });
+    }
+
+    return true;
+  };
+
+  var defer = function(fn) {
+    window.setTimeout(fn, 1);
+  };
+
+  /*
+    Global menu function accessible through window.skrollr.menu.init.
+  */
+  skrollr.menu = {};
+  skrollr.menu.init = function(skrollrInstance, options) {
+    _skrollrInstance = skrollrInstance;
+
+    options = options || {};
+
+    _easing = options.easing || DEFAULT_EASING;
+    _animate = options.animate !== false;
+    _duration = options.duration || DEFAULT_DURATION;
+
+    if(typeof _duration === 'number') {
+      _duration = (function(duration) {
+        return function() {
+          return duration;
+        };
+      }(_duration));
+    }
+
+    //Use event bubbling and attach a single listener to the document.
+    skrollr.addEvent(document, 'click', handleClick);
+
+    if(supportsHistory) {
+      window.addEventListener('popstate', function(e) {
+        var state = e.state || {};
+        var top = state.top || 0;
+
+        defer(function() {
+          _skrollrInstance.setScrollTop(top);
+        });
+      }, false);
+    }
+  };
+
+  //Private reference to the initialized skrollr.
+  var _skrollrInstance;
+
+  var _easing;
+  var _duration;
+  var _animate;
+
+  //In case the page was opened with a hash, prevent jumping to it.
+  //http://stackoverflow.com/questions/3659072/jquery-disable-anchor-jump-when-loading-a-page
+  defer(function() {
+    if(window.location.hash) {
+      window.scrollTo(0, 0);
+
+      if(document.querySelector) {
+        var link = document.querySelector('a[href="' + window.location.hash + '"]');
+
+        if(link) {
+          handleLink(link, true);
+        }
+      }
+    }
+  });
+}(document, window));
+
+var s = skrollr.init(/*other stuff*/);
+
+//The options (second parameter) are all optional. The values shown are the default values.
+skrollr.menu.init(s, {
+    //skrollr will smoothly animate to the new position using `animateTo`.
+    animate: true,
+
+    //The easing function to use.
+    easing: 'sqrt',
+
+    //How long the animation should take in ms.
+    duration: function(currentTop, targetTop) {
+        //By default, the duration is hardcoded at 500ms.
+        return 1000;
+
+        //But you could calculate a value based on the current scroll position (`currentTop`) and the target scroll position (`targetTop`).
+        //return Math.abs(currentTop - targetTop) * 10;
+    },
+});
+
+$(".icon-bookmark").click(function(){
+    $("#placemark").addClass("placemarked");
+    $(".icon-bookmark").addClass("pressed");
+});
+
+
+
+$('#mce-EMAIL').focus(function(){
+  $('#therocket').removeClass('icon-rotate-180');
+
+});
+
+</script>
